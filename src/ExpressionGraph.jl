@@ -364,6 +364,7 @@ Base.:^(a::FastDifferentiation.Node, b::Integer) = simplify_check_cache(^, a, b)
 Base.convert(::Type{Node}, a::T) where {T<:Real} = Node(a)
 Base.promote_rule(::Type{<:Real}, ::Type{Node}) = Node
 Base.promote_rule(::Type{Bool}, ::Type{Node}) = Node
+promote_rule(::Type{ForwardDiff.Dual{T, V, N}}, ::Type{FastDifferentiation.Node}) where {T, V, N} = Node
 
 function Base.:-(a::AbstractArray{<:Node,N}) where {N}
     if length(a) == 0
